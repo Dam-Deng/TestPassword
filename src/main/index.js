@@ -16,12 +16,12 @@ const winURL = process.env.NODE_ENV === 'development'
 function createWindow() {
   /**
    * Initial window options
-   * iPhone 6plus size
+   * iPhone 6plus size 414 * 736
    */
   mainWindow = new BrowserWindow({
     height: 736,
     useContentSize: false,
-    width: 414,
+    width: 1000,
   });
 
   mainWindow.loadURL(winURL);

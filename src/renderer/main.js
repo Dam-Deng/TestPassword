@@ -6,6 +6,7 @@ import router from './router';
 import store from './store';
 
 import './../../node_modules/materialize-css/dist/css/materialize.min.css';
+import './../../node_modules/materialize-css/dist/js/materialize.min';
 
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
