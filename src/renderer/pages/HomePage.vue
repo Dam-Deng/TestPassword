@@ -9,10 +9,14 @@
                 </div>
             </div>
         </nav>
+        <div class="add-btn">
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+
         <router-link to="Login">Login</router-link>
         <ul class="security-list">
             <li v-for="(item, index) in securityList" :key="index" class="security-item">
-                    <i class="material-icons">vpn_key</i>
+                <i class="material-icons">vpn_key</i>
                 <div class="item-content">
                     <h6>{{item.name}}</h6>
                     <p>
@@ -21,6 +25,7 @@
                 </div>
             </li>
         </ul>
+
     </section>
 </template>
 
@@ -55,6 +60,12 @@
         background-color: black;
     }
 
+    .add-btn {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+    }
+
     .security-list {
         margin: 0;
         .security-item {
@@ -66,24 +77,24 @@
             margin-bottom: 0;
             border-bottom: 1px solid #ddd;
             transition: .3s;
-            &:hover{
+            &:hover {
                 background-color: rgba(220, 220, 220, 0.6);
             }
-            .material-icons{
+            .material-icons {
                 padding: 0 12px;
                 flex-basis: 28px;
             }
-            h5{
+            h5 {
                 margin: 0 0 20px 0;
             }
-            p{
+            p {
                 margin: 0;
             }
         }
         .span-link {
             cursor: pointer;
             transition: 0.2s;
-            &:hover{
+            &:hover {
                 color: #039be5;
             }
         }

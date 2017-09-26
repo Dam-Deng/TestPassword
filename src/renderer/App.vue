@@ -13,8 +13,10 @@
 </script>
 
 <style lang="scss">
-    #id {
-        background: #f0f0f0;
+    #app {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
     }
     .fade-enter-active {
         transition: opacity .5s
