@@ -16,6 +16,11 @@ export default new Router({
             component: require('@/pages/HomePage'),
         },
         {
+            path: '/security-form',
+            name: 'SecurityForm',
+            component: require('@/pages/SecurityForm'),
+        },
+        {
             path: '*',
             redirect: '/',
         },

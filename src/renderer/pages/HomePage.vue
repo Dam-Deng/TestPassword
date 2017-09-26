@@ -10,7 +10,11 @@
             </div>
         </nav>
         <div class="add-btn">
-            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <router-link
+                    class="btn-floating btn-large waves-effect waves-light black"
+                    :to="{name: 'SecurityForm'}">
+                <i class="material-icons">add</i>
+            </router-link>
         </div>
 
         <router-link to="Login">Login</router-link>
