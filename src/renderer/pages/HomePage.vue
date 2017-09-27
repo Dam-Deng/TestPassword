@@ -17,7 +17,7 @@
             </router-link>
         </div>
 
-        <router-link to="Login">Login</router-link>
+        <!--<router-link to="Login">Login</router-link>-->
         <ul class="security-list">
             <li v-for="(item, index) in securityList" :key="index" class="security-item">
                 <i class="material-icons">vpn_key</i>
@@ -72,6 +72,8 @@
 
     .security-list {
         margin: 0;
+        height: calc(100vh - 56px);
+        overflow: auto;
         .security-item {
             display: flex;
             justify-content: flex-start;
