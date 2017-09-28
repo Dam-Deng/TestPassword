@@ -12,6 +12,10 @@
         <div class="add-btn">
             <router-link
                     class="btn-floating btn-large waves-effect waves-light black"
+                    :class="isPulse ? 'pulse' : ''"
+                    @mouseover.native="mouseoverBtn"
+                    @mouseout.native="mouseoutBtn"
+
                     :to="{name: 'SecurityForm'}">
                 <i class="material-icons">add</i>
             </router-link>
@@ -20,7 +24,8 @@
         <!--<router-link to="Login">Login</router-link>-->
         <ul class="security-list">
             <li v-for="(item, index) in securityList" :key="index" class="security-item">
-                <i class="material-icons">vpn_key</i>
+                <img v-if="item.icon" class="material-icons" :src="item.icon" alt="">
+                <i v-else class="material-icons">vpn_key</i>
                 <div class="item-content">
                     <h6>{{item.name}}</h6>
                     <p>
@@ -38,7 +43,9 @@
 
     export default {
         data: function () {
-            return {}
+            return {
+                isPulse: false
+            }
         },
         computed: {
             securityList: function () {
@@ -49,6 +56,12 @@
             open(link) {
                 this.$electron.shell.openExternal(link);
                 return false;
+            },
+            mouseoverBtn() {
+                this.isPulse = true;
+            },
+            mouseoutBtn() {
+                this.isPulse = false;
             }
         }
     }
@@ -82,12 +95,13 @@
 
             margin-bottom: 0;
             border-bottom: 1px solid #ddd;
-            transition: .3s;
+            transition: .15s;
             &:hover {
+                border-left: 5px solid #000;
                 background-color: rgba(220, 220, 220, 0.6);
             }
             .material-icons {
-                padding: 0 12px;
+                padding: 0 16px;
                 flex-basis: 28px;
             }
             h5 {

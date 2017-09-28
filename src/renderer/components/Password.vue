@@ -3,7 +3,7 @@
         <input ref="password" id="password" :type="inputType" :value="value" @input="input"/>
         <label for="password">密码</label>
         <i class="material-icons password-visibility-icon" @click="togglePasswordType">{{passwordIcon}}</i>
-        <button class="waves-effect waves-light btn absolute-btn" type="button" @click="openDialog">生成密码
+        <button class="waves-effect waves-light btn absolute-btn black" type="button" @click="openDialog">生成密码
         </button>
 
         <section class="model-section" :class="modalClass">

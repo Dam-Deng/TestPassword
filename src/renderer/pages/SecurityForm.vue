@@ -17,7 +17,7 @@
                     <label for="account">账号</label>
                 </div>
                 <div class="input-field col s12">
-                    <Password v-model="password" ></Password>
+                    <Password v-model="password"></Password>
                 </div>
                 <div class="input-field col s12">
                     <input id="url" type="url" v-model="url" class="validate"/>
@@ -50,6 +50,8 @@
 
 <script>
     import Password from '@/components/Password.vue';
+    import store from '@/store/index';
+    import router from '@/router/index';
 
     export default {
         data: function () {
@@ -63,7 +65,7 @@
         },
         computed: {
             canSubmit: function () {
-                if (this.account && this.password && (this.name || this.url)) {
+                if (this.account && this.password && this.name) {
                     return 'pulse';
                 } else {
                     return 'disabled';
@@ -74,8 +76,24 @@
             Password
         },
         methods: {
+            reset: function () {
+                this.name = '';
+                this.account = '';
+                this.password = '';
+                this.url = '';
+                this.remark = '';
+            },
             onSubmit: function () {
-                console.log(this.password);
+                console.log(123);
+                store.dispatch('SAVE_SECURITY_DATA', {
+                    name: this.name,
+                    account: this.account,
+                    password: this.password,
+                    url: this.url,
+                    remark: this.remark
+                });
+                this.reset();
+                router.replace({name: 'Home'});
             }
         }
     }
