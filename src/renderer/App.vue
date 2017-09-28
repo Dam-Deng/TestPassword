@@ -7,8 +7,13 @@
 </template>
 
 <script>
+    import store from '@/store/index';
+
     export default {
         name: 'test-password',
+        created: function () {
+            store.dispatch('SYNC_SECURITY_DATA');
+        },
     };
 </script>
 

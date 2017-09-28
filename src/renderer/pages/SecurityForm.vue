@@ -56,10 +56,10 @@
     export default {
         data: function () {
             return {
-                name: '',
-                account: '',
-                password: '',
-                url: '',
+                name: '百度网盘',
+                account: '240242398@qq.com',
+                password: 'baidu441732703',
+                url: 'https://pan.baidu.com/',
                 remark: '',
             }
         },
@@ -84,7 +84,6 @@
                 this.remark = '';
             },
             onSubmit: function () {
-                console.log(123);
                 store.dispatch('SAVE_SECURITY_DATA', {
                     name: this.name,
                     account: this.account,
