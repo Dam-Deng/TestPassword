@@ -1,14 +1,16 @@
-const SecurityData = function (name, account, password, host, url, remark) {
-    this.name = name;
-    this.account = account;
-    this.password = password;
-    this.host = host;
-    this.url = url;
-    this.remark = remark;
-    this.icon = 'http://www.baidu.com/favicon.ico'
-};
+import DB from '@/store/db'
 
-SecurityData.create = function (data) {
+// const SecurityData = function (name, account, password, host, url, remark) {
+//     this.name = name;
+//     this.account = account;
+//     this.password = password;
+//     this.host = host;
+//     this.url = url;
+//     this.remark = remark;
+//     this.icon = 'http://www.baidu.com/favicon.ico'
+// };
+
+const SecurityData = function (data) {
     this.name = data.name;
     this.account = data.account;
     this.password = data.password;
@@ -20,8 +22,8 @@ SecurityData.create = function (data) {
 
 const state = {
     list: [
-        new SecurityData('百度网盘', '240242398@qq.com', 'baidu', 'https://pan.baidu.com', 'https://pan.baidu.com', ''),
-        new SecurityData('微信公众平台', '240242398@qq.com', 'a', 'https://mp.weixin.qq.com', 'https://mp.weixin.qq.com', ''),
+        // new SecurityData('百度网盘', '240242398@qq.com', 'baidu', 'https://pan.baidu.com', 'https://pan.baidu.com', ''),
+        // new SecurityData('微信公众平台', '240242398@qq.com', 'a', 'https://mp.weixin.qq.com', 'https://mp.weixin.qq.com', ''),
     ]
 };
 
@@ -33,14 +35,10 @@ const getters = {
 
 const mutations = {
     SAVE_SECURITY_DATA(state, data) {
-        let SecurityDataItem = new SecurityData(
-            data.name,
-            data.account,
-            data.password,
-            data.host,
-            data.url,
-            data.remark);
-        state.list.push(SecurityDataItem);
+        state.list.push(data);
+    },
+    SAVE_SECURITY_LIST(state, list) {
+        state.list = list;
     },
 };
 
@@ -54,9 +52,18 @@ const actions = {
             let element = document.createElement('a');
             element.href = arg.url;
             arg.host = element.origin;
-            arg.icon = element.origin + '/favicon.ico';
+            // arg.icon = element.origin + '/favicon.ico';
         }
-        context.commit('SAVE_SECURITY_DATA', arg);
+
+        let item = new SecurityData(arg);
+        DB.insert(item, function (data) {
+            context.commit('SAVE_SECURITY_DATA', data);
+        })
+    },
+    SYNC_SECURITY_DATA(context) {
+        DB.findAll(function (list) {
+            context.commit('SAVE_SECURITY_LIST', list);
+        })
     }
 };
 

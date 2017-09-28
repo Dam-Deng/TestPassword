@@ -52,6 +52,13 @@
                 return store.getters.GET_SECURITY_LIST;
             }
         },
+        mounted: function () {
+            setTimeout(() => {
+                if (this.securityList.length === 0) {
+                    this.isPulse = true;
+                }
+            }, 200);
+        },
         methods: {
             open(link) {
                 this.$electron.shell.openExternal(link);
