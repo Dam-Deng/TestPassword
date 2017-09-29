@@ -1,9 +1,12 @@
 import Datastore from 'nedb';
+import electron from 'electron';
 
-let db = new Datastore({filename: './security.db'});
+const DATA_PATH = electron.remote.app.getPath('userData');
+
+const db = new Datastore({filename: DATA_PATH + '/security.db'});
 db.loadDatabase(function (err) {
     if (err) {
-        console.log(err);
+        // alert(err.toString());
         alert('数据出现问题，请联系开发者');
     }
 });
