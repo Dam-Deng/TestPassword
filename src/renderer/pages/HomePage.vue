@@ -37,6 +37,8 @@
                         <span class="span-link" @click="open(item.host)">{{item.host}}</span>
                     </p>
                 </div>
+                <i class="material-icons hover-icon" @click.stop="editItem(item)">edit</i>
+                <i class="material-icons hover-icon" @click.stop="deleteItem(item)">delete</i>
             </li>
         </ul>
 
@@ -62,6 +64,13 @@
                         </span>
                     </div>
                 </div>
+            </div>
+        </MUDialog>
+
+
+        <MUDialog ref="deleteDialog">
+            <div class="container">
+                <h5>警告!</h5>
             </div>
         </MUDialog>
     </section>
@@ -111,6 +120,14 @@
                 this.securityItem = item;
                 this.$refs.dialog.open();
             },
+            editItem(item) {
+                console.log(item);
+            },
+            deleteItem(item) {
+                if(confirm('你确定要删除 '+item.name +' 这条记录?')){
+                    store.dispatch('DELETE_SECURITY_DATA', {_id: item._id});
+                }
+            },
             mouseoverBtn() {
                 this.isPulse = true;
             },
@@ -159,6 +176,19 @@
             &:hover {
                 border-left: 5px solid #000;
                 background-color: rgba(220, 220, 220, 0.6);
+                .hover-icon{
+                    display: block;
+                }
+            }
+            .item-content{
+                flex-grow: 1;
+            }
+            .hover-icon{
+                display: none;
+                cursor: pointer;
+                &:hover{
+                    color: #039be5;
+                }
             }
             .material-icons {
                 padding: 0 16px;

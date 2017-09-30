@@ -35,7 +35,13 @@ export default {
             }
         });
     },
-    remove: function (id) {
-
+    remove: function (id, callback) {
+        db.remove({_id: id}, {}, function (err, numRemoved) {
+            if (numRemoved !== 1) {
+                alert('删除失败');
+            } else {
+                callback && callback(numRemoved);
+            }
+        });
     }
 }
