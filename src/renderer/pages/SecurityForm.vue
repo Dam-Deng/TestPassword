@@ -39,7 +39,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="center clearfix">
-                    <button class="waves-effect waves-light btn-floating btn-large" :class="canSubmit" type="submit">
+                    <button class="waves-effect waves-light btn-floating btn-large black" :class="canSubmit" type="submit">
                         OK
                     </button>
                 </div>

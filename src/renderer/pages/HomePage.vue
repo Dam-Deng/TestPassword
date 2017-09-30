@@ -23,7 +23,12 @@
 
         <!--<router-link to="Login">Login</router-link>-->
         <ul class="security-list">
-            <li v-for="(item, index) in securityList" :key="index" class="security-item">
+            <li
+                    v-for="(item, index) in securityList"
+                    :key="index"
+                    class="security-item"
+                    @click="openDialog(item)"
+            >
                 <img v-if="item.icon" class="material-icons" :src="item.icon" alt="">
                 <i v-else class="material-icons">vpn_key</i>
                 <div class="item-content">
@@ -35,15 +40,47 @@
             </li>
         </ul>
 
+        <MUDialog ref="dialog">
+            <div class="container security-detail">
+                <h5><span class="span-link" @click="open(securityItem.url)">{{securityItem.name}}</span></h5>
+                <hr>
+                <div class="row">
+                    <div class="col s3 right-align">账号</div>
+                    <div class="col s9">
+                        <span class="copy-item" @click="copy(securityItem.account)">
+                            {{securityItem.account}}
+                            <span class="copy-btn">复制</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3 right-align">密码</div>
+                    <div class="col s9">
+                        <span class="copy-item" @click="copy(securityItem.password)">
+                            {{'*'.repeat(securityItem.password.length)}}
+                            <span class="copy-btn">复制</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </MUDialog>
     </section>
 </template>
 
 <script>
     import store from '@/store/index';
+    import MUDialog from '@/components/MUDialog.vue'
+    import {clipboard} from 'electron';
 
     export default {
         data: function () {
             return {
+                securityItem: {
+                    name: '',
+                    account: '',
+                    password: '',
+                    url: '',
+                },
                 isPulse: false
             }
         },
@@ -52,17 +89,27 @@
                 return store.getters.GET_SECURITY_LIST;
             }
         },
+        components: {
+            MUDialog
+        },
         mounted: function () {
             setTimeout(() => {
                 if (this.securityList.length === 0) {
                     this.isPulse = true;
                 }
-            }, 200);
+            }, 500);
         },
         methods: {
+            copy(content) {
+                clipboard.writeText(content, 'selection');
+            },
             open(link) {
                 this.$electron.shell.openExternal(link);
                 return false;
+            },
+            openDialog(item) {
+                this.securityItem = item;
+                this.$refs.dialog.open();
             },
             mouseoverBtn() {
                 this.isPulse = true;
@@ -74,6 +121,11 @@
     }
 </script>
 
+<style scoped>
+    h6{
+        font-size: 1.2rem;
+    }
+</style>
 
 <style lang="scss">
     .input-field .search-label-btn {
@@ -100,6 +152,7 @@
             align-items: center;
             flex-flow: row wrap;
 
+            padding: 8px 0;
             margin-bottom: 0;
             border-bottom: 1px solid #ddd;
             transition: .15s;
@@ -118,11 +171,43 @@
                 margin: 0;
             }
         }
-        .span-link {
+    }
+
+    .span-link {
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+            color: #039be5;
+        }
+    }
+
+    .security-detail {
+        width: 360px;
+        .copy-item {
+            display: inline-block;
+            border: 1px dashed transparent;
+            border-radius: 4px;
+            padding-left: 3px;
             cursor: pointer;
-            transition: 0.2s;
+
             &:hover {
-                color: #039be5;
+                border: 1px dashed;
+                .copy-btn {
+                    visibility: visible;
+                }
+            }
+            &:active {
+                .copy-btn {
+                    background: #676767;
+                }
+            }
+            .copy-btn {
+                display: inline-block;
+                padding: 0 3px;
+                background: #000;
+                color: #fff;
+                visibility: hidden;
+
             }
         }
     }
