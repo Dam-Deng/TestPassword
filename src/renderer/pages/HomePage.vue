@@ -78,6 +78,7 @@
 
 <script>
     import store from '@/store/index';
+    import router from '@/router/index';
     import MUDialog from '@/components/MUDialog.vue'
     import {clipboard} from 'electron';
 
@@ -121,7 +122,7 @@
                 this.$refs.dialog.open();
             },
             editItem(item) {
-                console.log(item);
+                router.push({name: 'SecurityFormEdit', params: {_id: item._id}});
             },
             deleteItem(item) {
                 if(confirm('你确定要删除 '+item.name +' 这条记录?')){

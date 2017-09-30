@@ -30,6 +30,9 @@ const state = {
 const getters = {
     GET_SECURITY_LIST(state) {
         return state.list;
+    },
+    GET_SECURITY_ITEM(state) {
+        return (_id) => state.list.find(item => item._id === _id);
     }
 };
 
@@ -44,9 +47,20 @@ const mutations = {
     SAVE_SECURITY_LIST(state, list) {
         state.list = list;
     },
+    UPDATE_SECURITY_DATA(state, data) {
+        let index = state.list.findIndex(item => item._id === data._id);
+        let list = state.list;
+        list[index] = data;
+        state.list = [].concat(list);
+    },
 };
 
 const actions = {
+    SYNC_SECURITY_DATA(context) {
+        DB.findAll(function (list) {
+            context.commit('SAVE_SECURITY_LIST', list);
+        })
+    },
     GET_SECURITY_LIST(context) {
         // do something async
         // context.commit('SAVE_SECURITY_DATA');
@@ -64,6 +78,24 @@ const actions = {
             context.commit('SAVE_SECURITY_DATA', data);
         })
     },
+    UPDATE_SECURITY_DATA(context, arg) {
+        if (arg.url) {
+            let element = document.createElement('a');
+            element.href = arg.url;
+            arg.host = element.origin;
+            // arg.icon = element.origin + '/favicon.ico';
+        }
+        if (arg._id) {
+            DB.update(arg._id,
+                arg,
+                (numAffected) => {
+                console.log(numAffected, arg)
+                    context.commit('UPDATE_SECURITY_DATA', arg);
+                });
+        } else {
+            alert('更新失败');
+        }
+    },
     DELETE_SECURITY_DATA(context, arg) {
         if (arg._id) {
             DB.remove(arg._id,
@@ -74,11 +106,6 @@ const actions = {
             alert('删除失败');
         }
 
-    },
-    SYNC_SECURITY_DATA(context) {
-        DB.findAll(function (list) {
-            context.commit('SAVE_SECURITY_LIST', list);
-        })
     }
 };
 

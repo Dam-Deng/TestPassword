@@ -22,8 +22,14 @@ export default {
             }
         });
     },
-    update: function (id, data) {
-
+    update: function (id, data, callback) {
+        db.update({ _id: id }, data, {}, function (err, numAffected, affectedDocuments, upsert) {
+            if (numAffected !== 1) {
+                alert('删除失败');
+            } else {
+                callback && callback(numAffected);
+            }
+        })
     },
     findAll: function (callback) {
         db.find({}, function (err, list) {

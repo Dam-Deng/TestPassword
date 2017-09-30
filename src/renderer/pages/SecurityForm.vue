@@ -10,23 +10,23 @@
             <div class="row">
                 <div class="input-field col s12">
                     <input id="name" type="text" v-model="name"/>
-                    <label for="name">名称</label>
+                    <label for="name" :class="name ? 'active': ''">名称</label>
                 </div>
                 <div class="input-field col s12">
                     <input id="account" type="text" v-model="account"/>
-                    <label for="account">账号</label>
+                    <label for="account" :class="account ? 'active': ''">账号</label>
                 </div>
                 <div class="input-field col s12">
                     <Password v-model="password"></Password>
                 </div>
                 <div class="input-field col s12">
                     <input id="url" type="url" v-model="url" class="validate"/>
-                    <label for="url">网址</label>
+                    <label for="url" :class="url ? 'active': ''">网址</label>
                     <!--<button class="waves-effect waves-light btn absolute-btn" type="button">抓取数据</button>-->
                 </div>
                 <div class="input-field col s12">
                     <input id="remark" type="text" v-model="remark"/>
-                    <label for="remark">备注</label>
+                    <label for="remark" :class="remark ? 'active': ''">备注</label>
                 </div>
                 <!--<div class="collapse">-->
                 <!--<div class="input-field col s12">-->
@@ -39,7 +39,8 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="center clearfix">
-                    <button class="waves-effect waves-light btn-floating btn-large black" :class="canSubmit" type="submit">
+                    <button class="waves-effect waves-light btn-floating btn-large black" :class="canSubmit"
+                            type="submit">
                         OK
                     </button>
                 </div>
@@ -72,6 +73,19 @@
                 }
             }
         },
+        mounted: function () {
+            if (this.$route.params._id) {
+                this.fetchData(this.$route.params._id);
+            } else {
+                this.reset();
+            }
+        },
+//        watch: {
+//            '$route' (to, from) {
+//                console.log(to);
+//                console.log(from);
+//            }
+//        },
         components: {
             Password
         },
@@ -83,14 +97,33 @@
                 this.url = '';
                 this.remark = '';
             },
+            fetchData: function (_id) {
+                let item = store.getters.GET_SECURITY_ITEM(_id);
+                this.name = item.name;
+                this.account = item.account;
+                this.password = item.password;
+                this.url = item.url;
+                this.remark = item.remark;
+            },
             onSubmit: function () {
-                store.dispatch('SAVE_SECURITY_DATA', {
-                    name: this.name,
-                    account: this.account,
-                    password: this.password,
-                    url: this.url,
-                    remark: this.remark
-                });
+                if (this.$route.params._id) {
+                    store.dispatch('UPDATE_SECURITY_DATA', {
+                        _id: this.$route.params._id,
+                        name: this.name,
+                        account: this.account,
+                        password: this.password,
+                        url: this.url,
+                        remark: this.remark
+                    });
+                } else {
+                    store.dispatch('SAVE_SECURITY_DATA', {
+                        name: this.name,
+                        account: this.account,
+                        password: this.password,
+                        url: this.url,
+                        remark: this.remark
+                    });
+                }
                 this.reset();
                 router.replace({name: 'Home'});
             }
