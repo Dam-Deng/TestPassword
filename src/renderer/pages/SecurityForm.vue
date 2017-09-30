@@ -3,7 +3,7 @@
         <nav>
             <div class="nav-wrapper">
                 <router-link :to="{name: 'Home'}"><i class="material-icons back-icon">arrow_back</i></router-link>
-                <span class="nav-header-title">新增</span>
+                <span class="nav-header-title">{{title}}</span>
             </div>
         </nav>
         <form class="" @submit.stop.prevent="onSubmit">
@@ -59,9 +59,10 @@
             return {
                 name: '百度网盘',
                 account: '240242398@qq.com',
-                password: 'baidu441732703',
+                password: '123456',
                 url: 'https://pan.baidu.com/',
                 remark: '',
+                title: '新增'
             }
         },
         computed: {
@@ -75,6 +76,7 @@
         },
         mounted: function () {
             if (this.$route.params._id) {
+                this.title = '编辑';
                 this.fetchData(this.$route.params._id);
             } else {
                 this.reset();
@@ -96,6 +98,7 @@
                 this.password = '';
                 this.url = '';
                 this.remark = '';
+                this.title = '新增'
             },
             fetchData: function (_id) {
                 let item = store.getters.GET_SECURITY_ITEM(_id);
@@ -106,26 +109,28 @@
                 this.remark = item.remark;
             },
             onSubmit: function () {
-                if (this.$route.params._id) {
-                    store.dispatch('UPDATE_SECURITY_DATA', {
-                        _id: this.$route.params._id,
-                        name: this.name,
-                        account: this.account,
-                        password: this.password,
-                        url: this.url,
-                        remark: this.remark
-                    });
-                } else {
-                    store.dispatch('SAVE_SECURITY_DATA', {
-                        name: this.name,
-                        account: this.account,
-                        password: this.password,
-                        url: this.url,
-                        remark: this.remark
-                    });
+                if (this.account && this.password && this.name) {
+                    if (this.$route.params._id) {
+                        store.dispatch('UPDATE_SECURITY_DATA', {
+                            _id: this.$route.params._id,
+                            name: this.name,
+                            account: this.account,
+                            password: this.password,
+                            url: this.url,
+                            remark: this.remark
+                        });
+                    } else {
+                        store.dispatch('SAVE_SECURITY_DATA', {
+                            name: this.name,
+                            account: this.account,
+                            password: this.password,
+                            url: this.url,
+                            remark: this.remark
+                        });
+                    }
+                    this.reset();
+                    router.replace({name: 'Home'});
                 }
-                this.reset();
-                router.replace({name: 'Home'});
             }
         }
     }

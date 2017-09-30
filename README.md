@@ -32,5 +32,5 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 - [x] 增删改查
 - [ ] 动画优化
 - [ ] 密码加密
-- [ ] 应用图标
+- [x] 应用图标
 - [ ] 根据url抓取数据
