@@ -31,6 +31,11 @@ const getters = {
     GET_SECURITY_LIST(state) {
         return state.list;
     },
+    SEARCH_SECURITY_LIST(state) {
+        return (searchKey) => state.list.filter(item => {
+            return item.name.includes(searchKey) ||item.host.includes(searchKey)
+        });
+    },
     GET_SECURITY_ITEM(state) {
         return (_id) => state.list.find(item => item._id === _id);
     }

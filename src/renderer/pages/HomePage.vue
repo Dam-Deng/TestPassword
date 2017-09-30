@@ -3,9 +3,9 @@
         <nav>
             <div class="nav-wrapper">
                 <div class="input-field">
-                    <input id="search" type="search">
+                    <input id="search" type="search" v-model="searchKey">
                     <label class="label-icon search-label-btn" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+                    <i class="material-icons" @click="cheanSearchKey">close</i>
                 </div>
             </div>
         </nav>
@@ -91,12 +91,13 @@
                     password: '',
                     url: '',
                 },
+                searchKey: '',
                 isPulse: false
             }
         },
         computed: {
             securityList: function () {
-                return store.getters.GET_SECURITY_LIST;
+                return store.getters.SEARCH_SECURITY_LIST(this.searchKey);
             }
         },
         components: {
@@ -128,6 +129,9 @@
                 if(confirm('你确定要删除 '+item.name +' 这条记录?')){
                     store.dispatch('DELETE_SECURITY_DATA', {_id: item._id});
                 }
+            },
+            cheanSearchKey() {
+                this.searchKey = '';
             },
             mouseoverBtn() {
                 this.isPulse = true;
