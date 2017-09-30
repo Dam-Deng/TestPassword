@@ -1,6 +1,6 @@
 {
   "name": "test-password",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "dam <240242398@qq.com>",
   "description": "An electron-vue project",
   "license": null,
@@ -46,10 +46,10 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/keys_icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/keys_win.ico"
     },
     "linux": {
       "icon": "build/icons"

@@ -21,7 +21,7 @@
     export default {
         data: function () {
             return {
-                password: '123456'
+                password: ''
             }
         },
         mounted: function () {
@@ -29,8 +29,18 @@
         },
         methods: {
             submit: function () {
-                if (this.password === '123456') {
+                if(this.password === ''){
+                    return ;
+                }
+
+                let key = localStorage.getItem('test-password-login-key');
+                if(key === null){
+                    localStorage.setItem('test-password-login-key', this.password);
                     router.push('Home');
+                }else if (this.password === key) {
+                    router.push('Home');
+                }else{
+                    alert('密码错误');
                 }
             }
         }
