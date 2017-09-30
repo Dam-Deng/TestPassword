@@ -37,6 +37,10 @@ const mutations = {
     SAVE_SECURITY_DATA(state, data) {
         state.list.push(data);
     },
+    DELETE_SECURITY_DATA(state, _id) {
+        let index = state.list.findIndex(item => item._id === _id);
+        state.list.splice(index, 1);
+    },
     SAVE_SECURITY_LIST(state, list) {
         state.list = list;
     },
@@ -59,6 +63,17 @@ const actions = {
         DB.insert(item, function (data) {
             context.commit('SAVE_SECURITY_DATA', data);
         })
+    },
+    DELETE_SECURITY_DATA(context, arg) {
+        if (arg._id) {
+            DB.remove(arg._id,
+                (numRemoved) => {
+                    context.commit('DELETE_SECURITY_DATA', arg._id);
+                });
+        } else {
+            alert('删除失败');
+        }
+
     },
     SYNC_SECURITY_DATA(context) {
         DB.findAll(function (list) {
