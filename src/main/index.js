@@ -1,5 +1,6 @@
 import {app, BrowserWindow, Menu} from 'electron' // eslint-disable-line
 import template from './menu';
+import './upgrade';
 
 /**
  * Set `__static` path to static files in production
@@ -20,8 +21,7 @@ function createWindow() {
      * iPhone 6plus size 414 * 736
      */
     mainWindow = new BrowserWindow({
-        width: 414,
-        // width: 1000,
+        width: process.env.NODE_ENV !== 'development' ? 414 : 1000,
         height: 736,
         useContentSize: false,
     });

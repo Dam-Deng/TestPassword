@@ -93,9 +93,8 @@ const actions = {
         if (arg._id) {
             DB.update(arg._id,
                 arg,
-                (numAffected) => {
-                console.log(numAffected, arg)
-                    context.commit('UPDATE_SECURITY_DATA', arg);
+                (numAffected, affectedDocuments) => {
+                    context.commit('UPDATE_SECURITY_DATA', affectedDocuments);
                 });
         } else {
             alert('更新失败');
