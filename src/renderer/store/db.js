@@ -1,9 +1,20 @@
 import Datastore from 'nedb';
 import electron from 'electron';
+import {AES, enc} from 'crypto-js';
 
 const DATA_PATH = electron.remote.app.getPath('userData');
 
-const db = new Datastore({filename: DATA_PATH + '/security.db'});
+const db = new Datastore({
+    filename: DATA_PATH + '/security.db',
+    timestampData: true,
+    // 数据被序列化成字符串之后和被写入磁盘前
+    afterSerialization: function (data) {
+        return AES.encrypt(data, 'AortgbIKEQHtXK19nmOK2tw9D0qUNQiI').toString();
+    },
+    beforeDeserialization: function (data) {
+        return AES.decrypt(data, 'AortgbIKEQHtXK19nmOK2tw9D0qUNQiI').toString(enc.Utf8);
+    }
+});
 db.loadDatabase(function (err) {
     if (err) {
         // alert(err.toString());
@@ -23,11 +34,11 @@ export default {
         });
     },
     update: function (id, data, callback) {
-        db.update({ _id: id }, data, {}, function (err, numAffected, affectedDocuments, upsert) {
+        db.update({ _id: id }, data, {returnUpdatedDocs: true}, function (err, numAffected, affectedDocuments, upsert) {
             if (numAffected !== 1) {
                 alert('删除失败');
             } else {
-                callback && callback(numAffected);
+                callback && callback(numAffected, affectedDocuments);
             }
         })
     },
