@@ -17,7 +17,7 @@
                         </div>
                         <div class="input-field col s2">
                             <input id="passwordLengthText" type="number" v-model="passwordLength"/>
-                            <label for="passwordLengthText">长度</label>
+                            <label for="passwordLengthText" :class="passwordLength ? 'active': ''">长度</label>
                         </div>
                     </div>
                 </div>
