@@ -9,7 +9,7 @@
                         class="validate"
                         v-model="password"
                         v-on:keyup.enter="submit">
-                <label for="password">Main Password</label>
+                <label for="password" :class="password ? 'active': ''">Main Password</label>
             </div>
         </div>
     </section>
