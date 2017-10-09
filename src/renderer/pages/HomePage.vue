@@ -22,10 +22,10 @@
         </div>
 
         <!--<router-link to="Login">Login</router-link>-->
-        <ul class="security-list">
+        <transition-group name="list-transition" tag="ul" class="security-list">
             <li
                     v-for="(item, index) in securityList"
-                    :key="index"
+                    :key="item._id"
                     class="security-item"
                     @click="openDialog(item)">
                 <img v-if="item.icon" class="material-icons" :src="item.icon" alt="">
@@ -39,7 +39,7 @@
                 <i class="material-icons hover-icon" @click.stop="editItem(item)">edit</i>
                 <i class="material-icons hover-icon" @click.stop="deleteItem(item)">delete</i>
             </li>
-        </ul>
+        </transition-group>
 
         <MUDialog ref="dialog">
             <div class="container security-detail">
@@ -176,7 +176,8 @@
             padding: 8px 0;
             margin-bottom: 0;
             border-bottom: 1px solid #ddd;
-            transition: .15s;
+            /*transition: .15s;*/
+            transition: border .15s, background .15s, opacity .5s, transform .5s;
             &:hover {
                 border-left: 5px solid #000;
                 background-color: rgba(220, 220, 220, 0.6);
@@ -244,5 +245,15 @@
 
             }
         }
+    }
+
+
+    .list-transition-enter, .list-transition-leave-to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    .list-transition-leave-active {
+        position: absolute;
     }
 </style>
