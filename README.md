@@ -30,7 +30,7 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 
 ## Todo List
 - [x] 增删改查
-- [ ] 动画优化
+- [x] 动画优化
 - [ ] 密码加密
 - [x] 应用图标
 - [ ] 根据url抓取数据
