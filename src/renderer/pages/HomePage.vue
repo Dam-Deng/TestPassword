@@ -5,7 +5,7 @@
                 <div class="input-field">
                     <input id="search" type="search" v-model="searchKey">
                     <label class="label-icon search-label-btn" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons" @click="cheanSearchKey">close</i>
+                    <i class="material-icons" @click="cleanSearchKey">close</i>
                 </div>
             </div>
         </nav>
@@ -27,8 +27,7 @@
                     v-for="(item, index) in securityList"
                     :key="index"
                     class="security-item"
-                    @click="openDialog(item)"
-            >
+                    @click="openDialog(item)">
                 <img v-if="item.icon" class="material-icons" :src="item.icon" alt="">
                 <i v-else class="material-icons">vpn_key</i>
                 <div class="item-content">
@@ -130,7 +129,7 @@
                     store.dispatch('DELETE_SECURITY_DATA', {_id: item._id});
                 }
             },
-            cheanSearchKey() {
+            cleanSearchKey() {
                 this.searchKey = '';
             },
             mouseoverBtn() {
