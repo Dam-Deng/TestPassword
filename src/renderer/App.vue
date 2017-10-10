@@ -9,6 +9,7 @@
 <script>
     import store from '@/store/index';
 
+    alert('test!');
     export default {
         name: 'test-password',
         created: function () {
