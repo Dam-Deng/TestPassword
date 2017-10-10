@@ -7,7 +7,7 @@ language: c
 matrix:
   include:
   - os: osx
-  - os: linux
+#  - os: linux
     env: CC=clang CXX=clang++ npm_config_clang=1
     compiler: clang
 cache:
@@ -41,3 +41,12 @@ script:
 branches:
   only:
   - master
+
+deploy:              # 部署
+  provider: releases # 部署到GitHub Release，除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
+  api_key:           # 填写GitHub的token （Settings -> Personal access tokens -> Generate new token）
+    secure: 34d8449f03b3b04992c03b0fe89b97a0fb6bd01c
+  file: build/test-password-0.1.2-mac.zip   # 部署文件路径
+  skip_cleanup: true     # 设置为true以跳过清理,不然apk文件就会被清理
+#  on:     # 发布时机
+#    tags: true       # tags设置为true表示只有在有tag的情况下才部署
