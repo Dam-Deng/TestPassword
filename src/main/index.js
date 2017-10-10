@@ -24,6 +24,7 @@ function createWindow() {
         width: process.env.NODE_ENV !== 'development' ? 414 : 1000,
         height: 736,
         useContentSize: false,
+        title: 'test'
     });
 
     mainWindow.loadURL(winURL);
