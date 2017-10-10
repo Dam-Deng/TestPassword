@@ -1,4 +1,5 @@
 # test-password
+[![Build Status](https://travis-ci.org/Dam-Deng/TestPassword.svg?branch=master)](https://travis-ci.org/Dam-Deng/TestPassword)
 
 > An electron-vue project
 
