@@ -22,6 +22,7 @@ addons:
     - icnsutils
     #- xvfb
 before_install:
+- echo -e "machine github.com\n  login $GITHUB_TOKEN" >> ~/.netrc
 - mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v1.2.1/git-lfs-$([
   "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-1.2.1.tar.gz
   | tar -xz -C /tmp/git-lfs --strip-components 1 && /tmp/git-lfs/git-lfs pull
@@ -43,10 +44,16 @@ branches:
   - master
 
 deploy:              # 部署
-  provider: releases # 部署到GitHub Release，除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
-  api_key:           # 填写GitHub的token （Settings -> Personal access tokens -> Generate new token）
-    secure: 34d8449f03b3b04992c03b0fe89b97a0fb6bd01c
-  file: build/test-password-0.1.2-mac.zip   # 部署文件路径
-  skip_cleanup: true     # 设置为true以跳过清理,不然apk文件就会被清理
+#  provider: releases # 部署到GitHub Release，除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
+#  api_key:           # 填写GitHub的token （Settings -> Personal access tokens -> Generate new token）
+#    secure: 34d8449f03b3b04992c03b0fe89b97a0fb6bd01c
+#  file: build/test-password-0.1.2-mac.zip   # 部署文件路径
+#  skip_cleanup: true     # 设置为true以跳过清理,不然apk文件就会被清理
 #  on:     # 发布时机
 #    tags: true       # tags设置为true表示只有在有tag的情况下才部署
+  provider: releases
+  api_key: "108ff2d3e0d53819ed06c3b1cb4aeb20bdb65c52"
+  file: "build/test-password-0.1.2-mac.zip"
+  skip_cleanup: true
+  on:
+    tags: true
