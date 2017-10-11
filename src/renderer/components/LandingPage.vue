@@ -36,10 +36,10 @@
     name: 'landing-page',
     components: { SystemInformation },
     methods: {
-      open(link) {
+      open (link) {
         this.$electron.shell.openExternal(link);
-      },
-    },
+      }
+    }
   };
 </script>
 

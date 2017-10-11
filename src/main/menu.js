@@ -1,4 +1,4 @@
-import {app} from 'electron' // eslint-disable-line
+import {app, shell} from 'electron' // eslint-disable-line
 
 const template = [
     {
@@ -36,7 +36,7 @@ const template = [
                 label: 'Select All',
                 accelerator: 'CmdOrCtrl+A',
                 role: 'selectall'
-            },
+            }
         ]
     },
     {
@@ -45,37 +45,28 @@ const template = [
             {
                 label: 'Reload',
                 accelerator: 'CmdOrCtrl+R',
-                click: function(item, focusedWindow) {
-                    if (focusedWindow)
-                        focusedWindow.reload();
+                click: function (item, focusedWindow) {
+                    if (focusedWindow) { focusedWindow.reload(); }
                 }
             },
             {
                 label: 'Toggle Full Screen',
-                accelerator: (function() {
-                    if (process.platform === 'darwin')
-                        return 'Ctrl+Command+F';
-                    else
-                        return 'F11';
+                accelerator: (function () {
+                    if (process.platform === 'darwin') { return 'Ctrl+Command+F'; } else { return 'F11'; }
                 })(),
-                click: function(item, focusedWindow) {
-                    if (focusedWindow)
-                        focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+                click: function (item, focusedWindow) {
+                    if (focusedWindow) { focusedWindow.setFullScreen(!focusedWindow.isFullScreen()); }
                 }
             },
             {
                 label: 'Toggle Developer Tools',
-                accelerator: (function() {
-                    if (process.platform === 'darwin')
-                        return 'Alt+Command+I';
-                    else
-                        return 'Ctrl+Shift+I';
+                accelerator: (function () {
+                    if (process.platform === 'darwin') { return 'Alt+Command+I'; } else { return 'Ctrl+Shift+I'; }
                 })(),
-                click: function(item, focusedWindow) {
-                    if (focusedWindow)
-                        focusedWindow.toggleDevTools();
+                click: function (item, focusedWindow) {
+                    if (focusedWindow) { focusedWindow.toggleDevTools(); }
                 }
-            },
+            }
         ]
     },
     {
@@ -91,7 +82,7 @@ const template = [
                 label: 'Close',
                 accelerator: 'CmdOrCtrl+W',
                 role: 'close'
-            },
+            }
         ]
     },
     {
@@ -100,10 +91,10 @@ const template = [
         submenu: [
             {
                 label: 'Learn More',
-                click: function() { shell.openExternal('http://electron.atom.io') }
-            },
+                click: function () { shell.openExternal('http://electron.atom.io'); }
+            }
         ]
-    },
+    }
 ];
 
 if (process.platform === 'darwin') {
@@ -146,11 +137,11 @@ if (process.platform === 'darwin') {
             {
                 label: 'Quit',
                 accelerator: 'Command+Q',
-                click: function() { app.quit(); }
-            },
+                click: function () { app.quit(); }
+            }
         ]
     });
-    const windowMenu = template.find(function(m) { return m.role === 'window' })
+    const windowMenu = template.find(function (m) { return m.role === 'window'; });
     if (windowMenu) {
         windowMenu.submenu.push(
             {

@@ -78,7 +78,7 @@
 <script>
     import store from '@/store/index';
     import router from '@/router/index';
-    import MUDialog from '@/components/MUDialog.vue'
+    import MUDialog from '@/components/MUDialog.vue';
     import {clipboard} from 'electron';
 
     export default {
@@ -88,11 +88,11 @@
                     name: '',
                     account: '',
                     password: '',
-                    url: '',
+                    url: ''
                 },
                 searchKey: '',
                 isPulse: false
-            }
+            };
         },
         computed: {
             securityList: function () {
@@ -110,36 +110,36 @@
             }, 500);
         },
         methods: {
-            copy(content) {
+            copy (content) {
                 clipboard.writeText(content, 'selection');
             },
-            open(link) {
+            open (link) {
                 this.$electron.shell.openExternal(link);
                 return false;
             },
-            openDialog(item) {
+            openDialog (item) {
                 this.securityItem = item;
                 this.$refs.dialog.open();
             },
-            editItem(item) {
+            editItem (item) {
                 router.push({name: 'SecurityFormEdit', params: {_id: item._id}});
             },
-            deleteItem(item) {
-                if(confirm('你确定要删除 '+item.name +' 这条记录?')){
+            deleteItem (item) {
+                if (confirm('你确定要删除 ' + item.name + ' 这条记录?')) {
                     store.dispatch('DELETE_SECURITY_DATA', {_id: item._id});
                 }
             },
-            cleanSearchKey() {
+            cleanSearchKey () {
                 this.searchKey = '';
             },
-            mouseoverBtn() {
+            mouseoverBtn () {
                 this.isPulse = true;
             },
-            mouseoutBtn() {
+            mouseoutBtn () {
                 this.isPulse = false;
             }
         }
-    }
+    };
 </script>
 
 <style scoped>

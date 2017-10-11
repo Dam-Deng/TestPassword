@@ -13,7 +13,7 @@
         name: 'test-password',
         created: function () {
             store.dispatch('SYNC_SECURITY_DATA');
-        },
+        }
     };
 </script>
 

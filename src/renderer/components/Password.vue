@@ -41,7 +41,7 @@
                 modalClass: 'modal-close',
                 modalBGClass: 'hidden',
                 passwordLength: 12
-            }
+            };
         },
         props: {
             value: {
@@ -70,10 +70,10 @@
                 this.modalClass = '';
             },
             genNewPassword: function () {
-                let chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; //去除易混淆的字符
+                let chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; // 去除易混淆的字符
                 let length = this.passwordLength || 12;
                 let password = '';
-                for (let i = 0; i < length; i++){
+                for (let i = 0; i < length; i++) {
                     password += chars.charAt(Math.floor(Math.random() * chars.length));
                 }
                 this.$emit('input', password);
@@ -81,7 +81,7 @@
                 this.closeModal();
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">

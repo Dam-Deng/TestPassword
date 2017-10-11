@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    let transitionEndEventName = (function transitionEndEventName() {
+    let transitionEndEventName = (function transitionEndEventName () {
         const el = document.createElement('span');
         const transitions = {
             transition: 'transitionend',
@@ -52,31 +52,31 @@
             dialogTransform: ''
         }),
         computed: {
-            classes() {
+            classes () {
                 return {
                     'md-active': this.active
                 };
             },
-            dialogClasses() {
+            dialogClasses () {
                 return {
                     'md-fullscreen': this.mdFullscreen,
                     'md-transition-off': this.transitionOff,
                     'md-reference': this.mdOpenFrom || this.mdCloseTo
                 };
             },
-            styles() {
+            styles () {
                 return {
                     transform: this.dialogTransform
                 };
             }
         },
         methods: {
-            removeDialog() {
+            removeDialog () {
                 if (document.body.contains(this.dialogElement)) {
                     this.$el.parentNode.removeChild(this.$el);
                 }
             },
-            calculateDialogPos(ref) {
+            calculateDialogPos (ref) {
                 const reference = document.querySelector(ref);
 
                 if (reference) {
@@ -100,7 +100,7 @@
                     this.dialogTransform = `translate3D(${distance.left}px, ${distance.top}px, 0) scale(${widthInScale}, ${heightInScale})`;
                 }
             },
-            open() {
+            open () {
                 document.body.appendChild(this.dialogElement);
                 this.transitionOff = true;
                 this.calculateDialogPos(this.mdOpenFrom);
@@ -113,12 +113,12 @@
 
                 this.$emit('open');
             },
-            closeOnEsc() {
+            closeOnEsc () {
                 if (this.mdEscToClose) {
                     this.close();
                 }
             },
-            close() {
+            close () {
                 if (document.body.contains(this.dialogElement)) {
                     this.$nextTick(() => {
                         let cleanElement = () => {
@@ -148,14 +148,14 @@
                 }
             }
         },
-        mounted() {
+        mounted () {
             this.$nextTick(() => {
                 this.dialogElement = this.$el;
                 this.dialogInnerElement = this.$refs.dialog;
                 this.removeDialog();
             });
         },
-        beforeDestroy() {
+        beforeDestroy () {
             this.removeDialog();
         }
     };
