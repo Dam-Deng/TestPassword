@@ -13,8 +13,8 @@ matrix:
 cache:
   directories:
   - node_modules
-  - "$HOME/.electron"
-  - "$HOME/.cache"
+  - $HOME/.electron
+  - $HOME/.cache
 addons:
   apt:
     packages:
@@ -42,3 +42,10 @@ script:
 branches:
   only:
   - master
+deploy:
+  provider: releases
+  file: src/main/index.js
+  skip_cleanup: true
+env:
+  global:
+    secure: KSixCn6C7uTPk7LDrKDq9bHolbPNlK8ykSYsbatjPjSYnWQofDlF21eoRcv0kS6m6L80R5UY1bdoEt7UYr8o4ZPDqsBzCINDp7pIpUWVQMy2fWx7huMkG8gbw/1cgskYxFtnvqrRPgAfNUyRo2AThSI4HcG5km0x2R9Ic3JklFqMErjnNA4EiliALtXAb4nzNIBJOaVLrYziGW2c043nfnErraRY9IfUgKPnUv5NS16eoXT+hXKCTKTuQbKiyGWowIbkZUSvcT/zuIWQJP57Nwhr4BiTUFaf59B/0My8+VnG3Ma+h1VUf7CXqMzKHZNF2sSpXvRPHgq1G1q682tSFXKquSp1Nr5GG/kt1ioegvlCKe7fKjGuSgAs2UELBB8t/kanTV2TKgvtpILxD/hlwREF1ylr38Y3/rVO9J94tvFvG2bUH7ERjJ4F8GYIzf3N4gyaK131P3szobMzbTzhc1BbmM+XXEtVrpPRVqG5HyZGRHeopjGpB7v0Tq3TD1I4s462b2eqEX6OYFd2Cp+v4Lnx92Pt6BmH4W3qK9w18vLNVZq93OqdcUXf1p93CFY/3kjS3zNHY89kXKbEE8gvU0ekWUIxGO3GrX8rwm1seZsbsoyubFA+i13jrRAZ8uM7O0PME7QzQIHtiHFjk0AJoOfEYj+bhAD1xsykC0I04fU=
