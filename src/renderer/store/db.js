@@ -35,12 +35,15 @@ export default {
     },
     update: function (id, data, callback) {
         db.update({ _id: id }, data, {returnUpdatedDocs: true}, function (err, numAffected, affectedDocuments, upsert) {
-            if (numAffected !== 1) {
+            if (err) {
+                console.log(err);
+                alert('数据出现问题，请联系开发者');
+            } else if (numAffected !== 1) {
                 alert('删除失败');
             } else {
                 callback && callback(numAffected, affectedDocuments);
             }
-        })
+        });
     },
     findAll: function (callback) {
         db.find({}, function (err, list) {
@@ -54,11 +57,14 @@ export default {
     },
     remove: function (id, callback) {
         db.remove({_id: id}, {}, function (err, numRemoved) {
-            if (numRemoved !== 1) {
+            if (err) {
+                console.log(err);
+                alert('数据出现问题，请联系开发者');
+            } else if (numRemoved !== 1) {
                 alert('删除失败');
             } else {
                 callback && callback(numRemoved);
             }
         });
     }
-}
+};

@@ -1,16 +1,16 @@
 import fs from 'fs';
 import {app} from 'electron';
-import {AES, enc} from 'crypto-js';
+import {AES} from 'crypto-js';
 
 const DATA_PATH = app.getPath('userData');
 const PATH = DATA_PATH + '/security.db';
 
 try {
     // 打开文件
-    let fd = fs.openSync(PATH, 'rs+')
-    let buf = new Buffer(512 * 1024);
+    let fd = fs.openSync(PATH, 'rs+');
+    let buf = Buffer.alloc(512 * 1024);
     // 读取文件
-    let bytes = fs.readSync(fd, buf, 0, buf.length, 0)
+    let bytes = fs.readSync(fd, buf, 0, buf.length, 0);
     // console.log(bytes + "  字节被读取");
 
     // 仅输出读取的字节
@@ -31,4 +31,3 @@ try {
 } catch (e) {
     console.log('file not exist');
 }
-

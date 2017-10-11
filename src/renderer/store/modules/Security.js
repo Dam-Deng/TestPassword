@@ -1,4 +1,4 @@
-import DB from '@/store/db'
+import DB from '@/store/db';
 
 // const SecurityData = function (name, account, password, host, url, remark) {
 //     this.name = name;
@@ -28,49 +28,49 @@ const state = {
 };
 
 const getters = {
-    GET_SECURITY_LIST(state) {
+    GET_SECURITY_LIST (state) {
         return state.list;
     },
-    SEARCH_SECURITY_LIST(state) {
+    SEARCH_SECURITY_LIST (state) {
         return (searchKey) => state.list.filter(item => {
-            return item.name.includes(searchKey) ||item.host.includes(searchKey)
+            return item.name.includes(searchKey) || item.host.includes(searchKey);
         });
     },
-    GET_SECURITY_ITEM(state) {
+    GET_SECURITY_ITEM (state) {
         return (_id) => state.list.find(item => item._id === _id);
     }
 };
 
 const mutations = {
-    SAVE_SECURITY_DATA(state, data) {
+    SAVE_SECURITY_DATA (state, data) {
         state.list.push(data);
     },
-    DELETE_SECURITY_DATA(state, _id) {
+    DELETE_SECURITY_DATA (state, _id) {
         let index = state.list.findIndex(item => item._id === _id);
         state.list.splice(index, 1);
     },
-    SAVE_SECURITY_LIST(state, list) {
+    SAVE_SECURITY_LIST (state, list) {
         state.list = list;
     },
-    UPDATE_SECURITY_DATA(state, data) {
+    UPDATE_SECURITY_DATA (state, data) {
         let index = state.list.findIndex(item => item._id === data._id);
         let list = state.list;
         list[index] = data;
         state.list = [].concat(list);
-    },
+    }
 };
 
 const actions = {
-    SYNC_SECURITY_DATA(context) {
+    SYNC_SECURITY_DATA (context) {
         DB.findAll(function (list) {
             context.commit('SAVE_SECURITY_LIST', list);
-        })
+        });
     },
-    GET_SECURITY_LIST(context) {
+    GET_SECURITY_LIST (context) {
         // do something async
         // context.commit('SAVE_SECURITY_DATA');
     },
-    SAVE_SECURITY_DATA(context, arg) {
+    SAVE_SECURITY_DATA (context, arg) {
         if (arg.url) {
             let element = document.createElement('a');
             element.href = arg.url;
@@ -81,9 +81,9 @@ const actions = {
         let item = new SecurityData(arg);
         DB.insert(item, function (data) {
             context.commit('SAVE_SECURITY_DATA', data);
-        })
+        });
     },
-    UPDATE_SECURITY_DATA(context, arg) {
+    UPDATE_SECURITY_DATA (context, arg) {
         if (arg.url) {
             let element = document.createElement('a');
             element.href = arg.url;
@@ -100,7 +100,7 @@ const actions = {
             alert('更新失败');
         }
     },
-    DELETE_SECURITY_DATA(context, arg) {
+    DELETE_SECURITY_DATA (context, arg) {
         if (arg._id) {
             DB.remove(arg._id,
                 (numRemoved) => {
@@ -109,7 +109,6 @@ const actions = {
         } else {
             alert('删除失败');
         }
-
     }
 };
 
@@ -117,5 +116,5 @@ export default {
     state,
     getters,
     mutations,
-    actions,
+    actions
 };

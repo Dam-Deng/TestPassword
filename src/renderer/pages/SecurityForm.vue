@@ -63,7 +63,7 @@
                 url: 'https://pan.baidu.com/',
                 remark: '',
                 title: '新增'
-            }
+            };
         },
         computed: {
             canSubmit: function () {
@@ -98,7 +98,7 @@
                 this.password = '';
                 this.url = '';
                 this.remark = '';
-                this.title = '新增'
+                this.title = '新增';
             },
             fetchData: function (_id) {
                 let item = store.getters.GET_SECURITY_ITEM(_id);
@@ -133,7 +133,7 @@
                 }
             }
         }
-    }
+    };
 </script>
 
 

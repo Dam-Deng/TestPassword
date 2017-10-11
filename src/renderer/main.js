@@ -8,7 +8,6 @@ import store from './store';
 import './../../node_modules/materialize-css/dist/css/materialize.min.css';
 import './../../node_modules/materialize-css/dist/js/materialize.min';
 
-
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
@@ -18,5 +17,5 @@ new Vue({
   components: { App },
   router,
   store,
-  template: '<App/>',
+  template: '<App/>'
 }).$mount('#app');

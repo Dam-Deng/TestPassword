@@ -8,26 +8,26 @@ export default new Router({
         {
             path: '/',
             name: 'Login',
-            component: require('@/pages/LoginPage'),
+            component: require('@/pages/LoginPage')
         },
         {
             path: '/home',
             name: 'Home',
-            component: require('@/pages/HomePage'),
+            component: require('@/pages/HomePage')
         },
         {
             path: '/security-form',
             name: 'SecurityForm',
-            component: require('@/pages/SecurityForm'),
+            component: require('@/pages/SecurityForm')
         },
         {
             path: '/security-form/:_id/edit',
             name: 'SecurityFormEdit',
-            component: require('@/pages/SecurityForm'),
+            component: require('@/pages/SecurityForm')
         },
         {
             path: '*',
-            redirect: '/',
-        },
-    ],
+            redirect: '/'
+        }
+    ]
 });
