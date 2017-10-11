@@ -38,7 +38,7 @@ install:
 script:
 #- xvfb-maybe node_modules/.bin/karma start test/unit/karma.conf.js
 #- yarn run pack && xvfb-maybe node_modules/.bin/mocha test/e2e
-- yarn run build
+#- yarn run build
 branches:
   only:
   - master
@@ -52,8 +52,11 @@ deploy:              # 部署
 #  on:     # 发布时机
 #    tags: true       # tags设置为true表示只有在有tag的情况下才部署
   provider: releases
-  api_key: "108ff2d3e0d53819ed06c3b1cb4aeb20bdb65c52"
-  file: "build/test-password-0.1.2-mac.zip"
+#  api_key: "108ff2d3e0d53819ed06c3b1cb4aeb20bdb65c52"
+  user: "240242398@qq.com"
+  password: "a441732703"
+#  file: "build/test-password-0.1.2-mac.zip"
+  file: "src/main/index.js"
   skip_cleanup: true
-  on:
-    tags: true
+#  on:
+#    tags: true
