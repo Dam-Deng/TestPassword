@@ -36,9 +36,9 @@
                 let key = localStorage.getItem('test-password-login-key');
                 if (key === null) {
                     localStorage.setItem('test-password-login-key', this.password);
-                    router.push('Home');
+                    router.push({name: 'Home'});
                 } else if (this.password === key) {
-                    router.push('Home');
+                    router.push({name: 'Home'});
                 } else {
                     alert('密码错误');
                 }

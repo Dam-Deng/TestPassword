@@ -3,7 +3,7 @@
         <nav>
             <div class="nav-wrapper">
                 <router-link :to="{name: 'Home'}"><i class="material-icons back-icon">arrow_back</i></router-link>
-                <span class="nav-header-title">{{title}}</span>
+                <span id="formTitle" class="nav-header-title">{{title}}</span>
             </div>
         </nav>
         <form class="" @submit.stop.prevent="onSubmit">
@@ -39,7 +39,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="center clearfix">
-                    <button class="waves-effect waves-light btn-floating btn-large black" :class="canSubmit"
+                    <button id="secrurityFormSubmitBtn" class="waves-effect waves-light btn-floating btn-large black" :class="canSubmit"
                             type="submit">
                         OK
                     </button>

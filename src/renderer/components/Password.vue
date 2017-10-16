@@ -3,7 +3,7 @@
         <input ref="password" id="password" :type="inputType" :value="value" @input="input"/>
         <label for="password" :class="value ? 'active': ''">密码</label>
         <i class="material-icons password-visibility-icon" @click="togglePasswordType">{{passwordIcon}}</i>
-        <button class="waves-effect waves-light btn absolute-btn black" type="button" @click="openDialog">生成密码
+        <button id="genPassword" class="waves-effect waves-light btn absolute-btn black" type="button" @click="openDialog">生成密码
         </button>
 
         <section class="model-section" :class="modalClass">
@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-action modal-close waves-effect waves-red btn-flat" type="button" @click="closeModal">取消</button>
-                    <button class="modal-action modal-close waves-effect waves-green btn-flat" type="button" @click="genNewPassword">确定</button>
+                    <button id="cancelGenPassword" class="modal-action modal-close waves-effect waves-red btn-flat" type="button" @click="closeModal">取消</button>
+                    <button id="confirmGenPassword" class="modal-action modal-close waves-effect waves-green btn-flat" type="button" @click="genNewPassword">确定</button>
                 </div>
             </div>
             <div class="model-bg" @click="closeModal"></div>

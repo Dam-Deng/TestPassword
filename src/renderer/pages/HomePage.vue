@@ -11,6 +11,7 @@
         </nav>
         <div class="add-btn">
             <router-link
+                    id="addBtn"
                     class="btn-floating btn-large waves-effect waves-light black"
                     :class="isPulse ? 'pulse' : ''"
                     @mouseover.native="mouseoverBtn"
@@ -22,7 +23,7 @@
         </div>
 
         <!--<router-link to="Login">Login</router-link>-->
-        <transition-group name="list-transition" tag="ul" class="security-list">
+        <transition-group name="list-transition" tag="ul" class="security-list" id="securityList">
             <li
                     v-for="(item, index) in securityList"
                     :key="item._id"
