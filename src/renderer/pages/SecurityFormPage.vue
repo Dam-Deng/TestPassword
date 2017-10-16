@@ -57,10 +57,10 @@
     export default {
         data: function () {
             return {
-                name: '百度网盘',
-                account: '240242398@qq.com',
-                password: '123456',
-                url: 'https://pan.baidu.com/',
+                name: '',
+                account: '',
+                password: '',
+                url: '',
                 remark: '',
                 title: '新增'
             };

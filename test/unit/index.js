@@ -11,3 +11,8 @@ testsContext.keys().forEach(testsContext)
 // you want coverage for.
 const srcContext = require.context('../../src/renderer', true, /^\.\/(?!main(\.js)?$)/)
 srcContext.keys().forEach(srcContext)
+
+// Statements: 语句覆盖率，执行到每个语句；
+// Branches: 分支覆盖率，执行到每个if代码块；
+// Functions: 函数覆盖率，调用到程式中的每一个函数；
+// Lines: 行覆盖率, 执行到程序中的每一行。
