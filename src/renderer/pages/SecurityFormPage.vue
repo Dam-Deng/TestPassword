@@ -140,6 +140,9 @@
 <style lang="scss">
     .security-form-section{
         height: 100vh;
+        .modal{
+            width: 90%;
+        }
     }
     .input-field {
         /*po*/
