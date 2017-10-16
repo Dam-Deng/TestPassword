@@ -18,12 +18,12 @@ export default new Router({
         {
             path: '/security-form',
             name: 'SecurityForm',
-            component: require('@/pages/SecurityForm')
+            component: require('@/pages/SecurityFormPage')
         },
         {
             path: '/security-form/:_id/edit',
             name: 'SecurityFormEdit',
-            component: require('@/pages/SecurityForm')
+            component: require('@/pages/SecurityFormPage')
         },
         {
             path: '*',
